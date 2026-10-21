@@ -1,7 +1,7 @@
 # GitHub Actions self-hosted runner: the official release binaries on Debian slim.
 # Not Alpine: the runner and the Node.js it bundles for actions are built for glibc only.
 
-FROM debian:13.7-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f AS download
+FROM debian:13.7-slim@sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad AS download
 ARG TARGETARCH
 # https://github.com/actions/runner/releases (SHA256 from the release notes)
 ARG RUNNER_VERSION=2.338.0
@@ -16,7 +16,7 @@ RUN set -eu; \
     echo "$sha  /runner.tar.gz" | sha256sum -c -; \
     mkdir /runner && tar -xzf /runner.tar.gz -C /runner
 
-FROM debian:13.7-slim@sha256:a29215f6a35e51e22adffa17f89e9d2ef06214e64a2bad10d765c46aea49f11f
+FROM debian:13.7-slim@sha256:62bd423aeee912639ca8ee681c2b762cb3e25137e0a92b20be455898a9f034ad
 # What the runner needs (bin/installdependencies.sh) plus git for actions/checkout.
 RUN apt-get update \
  && apt-get install -y --no-install-recommends ca-certificates git libicu76 libkrb5-3 libssl3t64 zlib1g \
